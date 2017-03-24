@@ -34,10 +34,15 @@ int main(int argc, char ** argv) //function takes in two line arguments - an int
 {
 
     if ( argc < 2 ) {
-		printf( "Usage: parser <Input Filename>\n" ); //if the user chooses 1 for their integer argument, the program returns the name of the input file
+		printf( "Usage: parser <Input Filename>\n" ); //if the user chooses 1 for their integer argument, the program returns the name of the input file 
 		return 1;
 	}
 
-	
+	fp = fopen( argv[1], "r" ); //else, the program will attempt will attempt to run
+	if ( fp == NULL ) {
+		printf( "Error: Failed to open input file %s.", argv[1] ); //if the user
+		return 1;
+	}
+	}
 }
 
