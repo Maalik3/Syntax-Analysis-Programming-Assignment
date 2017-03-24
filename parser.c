@@ -1,8 +1,11 @@
+//Maalik Hornbuckle
+//Syntax-Analysis-Programming-Assignment
+//Dr.Li
+//March 2017
 
 #include <stdio.h>
 #include <ctype.h>
 
-/* Global Variables */
 int lineCount;
 char line[100];
 int linePos;
@@ -14,12 +17,9 @@ int token;
 int nextToken;
 FILE * fp;
 
-/* Character Classes */
 #define LETTER 0
 #define DIGIT 1
 #define UNKNOWN 99
-
-/* Token Codes */
 #define INT_LIT 10
 #define IDENT 11
 #define ASSIGN_OP 20
@@ -36,6 +36,7 @@ void error( const char * error ) {
 }
 
 
+//a function to add nextChar
 void addChar() {
 	if ( lexLen <= 98 )
 	{
@@ -46,7 +47,7 @@ void addChar() {
 		printf( "Error: lexeme is too long.\n");
 }
 
-
+//function to get the next character of input
 void getChar() {
 	if ( (nextChar = line[linePos++]) != 0 ) {
 		if ( isalpha(nextChar) )
@@ -180,7 +181,7 @@ void expr() {
 	/* parse the first term */
 	term();
 
-	/* as long as the next token is + or -, get the next token and parse the next token */
+	//as long as the next token is + or -, get the next token and parse the next token
 	while( nextToken == ADD_OP || nextToken == SUB_OP ) {
 		lex();
 		term();
