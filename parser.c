@@ -203,5 +203,24 @@ int main(int argc, char ** argv) //function takes in two line arguments - an int
     }
 
     lineCount = 0; //initialize line count
+
+    while( fgets( line, sizeof(line), fp) != NULL )
+	{
+		lineCount += 1;
+		linePos = 0;
+
+		/* get the very first character */
+		getChar();
+
+		do {
+			lex();
+			expr();
+		}
+		while( nextToken != EOF );
+	}
+
+	fclose(fp);
+
+	return 0;
 }
 
