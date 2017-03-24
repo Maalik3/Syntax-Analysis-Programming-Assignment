@@ -66,6 +66,84 @@ void getNonBlank() {
 		getChar();
 }
 
+//function to lookup operators and parentheses and return the token
+int (char ch ){
+	switch(ch) {
+	case '(':
+		addChar();
+		nextToken = LEFT_PARAN;
+		break;
+	case ')':
+		addChar();
+		nextToken = RIGHT_PAREN;
+		break;
+	case '+':
+		addChar();
+		nextToken = ADD_OP;
+		break;
+	case '-':
+		addChar();
+		nextToken = SUB_OP;
+		break;
+	case '*':
+		addChar();
+		nextToken = MULT_OP;
+		break;
+	case '/':
+		addChar();
+		nextToken = DIV_OP;
+		break;
+	default:
+		addChar();
+		nextToken = EOF;
+		break;
+	}
+
+	return nextToken;
+}
+
+//lexical analyzer for arithmetic expressions
+int lex() {
+	lexLen = 0;
+	getNonBlank();
+
+	switch( charClass ) {
+	case LETTER:
+		addChar();
+		getChar();
+		while( charClass == LETTER || charClass == DIGIT )  {
+			addChar();
+			getChar();
+		}
+		nextToken = IDENT;
+		break;
+	case DIGIT:
+		addChar();
+		getChar();
+		while( charClass == DIGIT ) {
+			addChar();
+			getChar();
+		}
+		nextToken = INT_LIT;
+		break;
+	case UNKNOWN: /* Parens and operators */
+		lookup(nextChar);
+		getChar();
+		break;
+	case EOF:
+		nextToken = EOF;
+		lexeme[0] = 'E';
+		lexeme[1] = 'O';
+		lexeme[2] = 'F';
+		lexeme[3] = 0;
+		break;
+	}
+
+	printf( "Next Token is: %d, Next lexeme is %s\n", nextToken, lexeme );
+	return nextToken;
+}
+
+
 
 int main(int argc, char ** argv) //function takes in two line arguments - an interger argument & character array
 {
@@ -77,9 +155,10 @@ int main(int argc, char ** argv) //function takes in two line arguments - an int
 
 	fp = fopen( argv[1], "r" ); //else, the program will attempt will attempt to run
 	if ( fp == NULL ) {
-		printf( "Error: Failed to open input file %s.", argv[1] ); //if the user
+		printf( "Error: Failed to open input file %s.", argv[1] ); //if file is empty, the program will send this output
 		return 1;
-	}
-	}
+    }
+
+    lineCount = 0; //initialize line count
 }
 
