@@ -35,6 +35,31 @@ void error( const char * error ) {
 	printf( "Error: '%s' line %d, column %d:\n%s\n", error, lineCount, linePos, line );
 }
 
+
+void addChar() {
+	if ( lexLen <= 98 )
+	{
+		lexeme[lexLen++] = nextChar;
+		lexeme[lexLen] = 0;
+	}
+	else
+		printf( "Error: lexeme is too long.\n");
+}
+
+
+void getChar() {
+	if ( (nextChar = line[linePos++]) != 0 ) {
+		if ( isalpha(nextChar) )
+			charClass = LETTER;
+		else if ( isdigit(nextChar))
+			charClass = DIGIT;
+		else
+			charClass = UNKNOWN;
+	}
+	else
+		charClass = EOF;
+}
+
 int main(int argc, char ** argv) //function takes in two line arguments - an interger argument & character array
 {
 
