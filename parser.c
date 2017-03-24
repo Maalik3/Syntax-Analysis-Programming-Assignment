@@ -29,3 +29,15 @@ FILE * fp;
 #define DIV_OP 24
 #define LEFT_PARAN 25
 #define RIGHT_PAREN 26
+
+int main(int argc, char ** argv) //function takes in two line arguments - an interger argument & character array
+{
+
+    if ( argc < 2 ) {
+		printf( "Usage: parser <Input Filename>\n" ); //if the user chooses 1 for their integer argument, the program returns the name of the input file
+		return 1;
+	}
+
+	
+}
+
