@@ -60,6 +60,13 @@ void getChar() {
 		charClass = EOF;
 }
 
+
+void getNonBlank() {
+	while( isspace(nextChar) && nextChar != '\r' && nextChar != '\n' )
+		getChar();
+}
+
+
 int main(int argc, char ** argv) //function takes in two line arguments - an interger argument & character array
 {
 
